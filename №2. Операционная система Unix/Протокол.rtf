@@ -1,0 +1,201 @@
+{\rtf1\ansi\deff0\deftab480
+
+{\fonttbl
+{\f000 Courier New;}
+{\f001 Courier New;}
+}
+
+{\colortbl
+\red000\green000\blue000;
+\red255\green255\blue255;
+\red000\green000\blue000;
+\red255\green255\blue255;
+}
+
+\f4259935\fs20\cb3\cf2 \highlight1\cf0 semyon@semyon-VirtualBox:~$ cat head\par
+********************************\par
+*                              *\par
+*   \u1051?\u1072?\u1073?\u1086?\u1088?\u1072?\u1090?\u1086?\u1088?\u1085?\u1072?\u1103? \u1088?\u1072?\u1073?\u1086?\u1090?\u1072? \u8470?2     *\par
+*      \u1054?\u1089?\u1085?\u1086?\u1074?\u1099?\u1077? \u1091?\u1090?\u1080?\u1083?\u1080?\u1090?\u1099?         *\par
+*  \u1086?\u1087?\u1077?\u1088?\u1072?\u1094?\u1080?\u1086?\u1085?\u1085?\u1086?\u1081? \u1089?\u1080?\u1089?\u1090?\u1077?\u1084?\u1099? Unix   *\par
+*      \u1056?\u1072?\u1073?\u1086?\u1090?\u1091? \u1074?\u1099?\u1087?\u1086?\u1083?\u1085?\u1080?\u1083?:        *\par
+*      \u1057?\u1090?\u1077?\u1089?\u1085?\u1103?\u1075?\u1080?\u1085? \u1057?\u1077?\u1084?\u1105?\u1085?         *\par
+*       \u1043?\u1088?\u1091?\u1087?\u1087?\u1072? 80-102\u1041?         *\par
+*                              *\par
+********************************\par
+semyon@semyon-VirtualBox:~$ pwd\par
+/home/semyon\par
+semyon@semyon-VirtualBox:~$ who\par
+semyon   :0           2015-10-05 00:15 (:0)\par
+semyon   pts/0        2015-10-05 00:32 (:0)\par
+semyon@semyon-VirtualBox:~$ who -b\par
+         system boot  2015-10-05 00:15\par
+semyon@semyon-VirtualBox:~$ who -u\par
+semyon   :0           2015-10-05 00:15   ?          1361 (:0)\par
+semyon   pts/0        2015-10-05 00:32   .          2619 (:0)\par
+semyon@semyon-VirtualBox:~$ who -d\par
+semyon@semyon-VirtualBox:~$ who -h\par
+who: invalid option -- 'h'\par
+Try 'who --help' for more information.\par
+semyon@semyon-VirtualBox:~$ who -H\par
+NAME     LINE         TIME             COMMENT\par
+semyon   :0           2015-10-05 00:15 (:0)\par
+semyon   pts/0        2015-10-05 00:32 (:0)\par
+semyon@semyon-VirtualBox:~$ who -r\par
+         run-level 2  2015-10-05 00:15\par
+semyon@semyon-VirtualBox:~$ who -t\par
+semyon@semyon-VirtualBox:~$ date\par
+\u1055?\u1085?. \u1086?\u1082?\u1090?.  5 00:50:21 MSK 2015\par
+semyon@semyon-VirtualBox:~$ rwho\par
+semyon   semyon-VirtualBox::0    Oct  5 00:15\par
+semyon   semyon-VirtualBox:pts/0 Oct  5 00:32 :16\par
+semyon@semyon-VirtualBox:~$ ruptime\par
+semyon-Virtu  up       0:34,     2 users,  load 0.07, 0.16, 0.22\par
+semyon@semyon-VirtualBox:~$ ruptime -t\par
+semyon-Virtu  up       0:34,     2 users,  load 0.07, 0.16, 0.22\par
+semyon@semyon-VirtualBox:~$ ruptime -l\par
+semyon-Virtu  up       0:34,     2 users,  load 0.07, 0.16, 0.22\par
+semyon@semyon-VirtualBox:~$ ruptime -u\par
+semyon-Virtu  up       0:34,     2 users,  load 0.07, 0.16, 0.22\par
+semyon@semyon-VirtualBox:~$ ls\par
+?        Documents  examples.desktop  head~  Pictures  Templates\par
+Desktop  Downloads  head              Music  Public    Videos\par
+semyon@semyon-VirtualBox:~$ ls -i\par
+440550 ?          434648 Downloads         440571 head~     434650 Public\par
+434647 Desktop    433323 examples.desktop  434652 Music     434649 Templates\par
+434651 Documents  433463 head              434653 Pictures  434654 Videos\par
+semyon@semyon-VirtualBox:~$ ls -a\par
+ls: cannot access .gvfs: Permission denied\par
+?              .dbus             .ICEauthority              .vboxclient-draganddrop.pid\par
+.              Desktop           .local                     .vboxclient-seamless.pid\par
+..             Documents         Music                      Videos\par
+.bash_history  Downloads         Pictures                   .Xauthority\par
+.bash_logout   examples.desktop  .profile                   .xinputrc\par
+.bashrc        .gconf            Public                     .xsession-errors\par
+.cache         .gvfs             Templates                  .xsession-errors.old\par
+.compiz        head              .vboxclient-clipboard.pid\par
+.config        head~             .vboxclient-display.pid\par
+semyon@semyon-VirtualBox:~$ ls -F\par
+?         Documents/  examples.desktop  head~   Pictures/  Templates/\par
+Desktop/  Downloads/  head              Music/  Public/    Videos/\par
+semyon@semyon-VirtualBox:~$ ls -B\par
+?        Documents  examples.desktop  Music     Public     Videos\par
+Desktop  Downloads  head              Pictures  Templates\par
+semyon@semyon-VirtualBox:~$ ls -s\par
+total 56\par
+ 4 ?         4 Documents  12 examples.desktop   4 head~   4 Pictures   4 Templates\par
+ 4 Desktop   4 Downloads   4 head               4 Music   4 Public     4 Videos\par
+semyon@semyon-VirtualBox:~$ ls -S\par
+examples.desktop  Documents  Music     Public     Videos  ?\par
+Desktop           Downloads  Pictures  Templates  head    head~\par
+semyon@semyon-VirtualBox:~$ ls -t\par
+head   ?          Downloads  Pictures  Templates  Desktop\par
+head~  Documents  Music      Public    Videos     examples.desktop\par
+semyon@semyon-VirtualBox:~$ cat > f1.txt\par
+abc\par
+123\par
+semyon@semyon-VirtualBox:~$ ls\par
+?        Documents  examples.desktop  head   Music     Public     Videos\par
+Desktop  Downloads  f1.txt            head~  Pictures  Templates\par
+semyon@semyon-VirtualBox:~$ cat f1.txt\par
+abc\par
+123\par
+semyon@semyon-VirtualBox:~$ cat f1.txt -n\par
+     1\tab abc\par
+     2\tab 123\par
+semyon@semyon-VirtualBox:~$ cat f1.txt -e\par
+abc$\par
+123$\par
+semyon@semyon-VirtualBox:~$ cp f1.txt f2.txt\par
+semyon@semyon-VirtualBox:~$ cat f1.txt f2.txt > f3.txt\par
+semyon@semyon-VirtualBox:~$ cat f3.txt \par
+abc\par
+123\par
+abc\par
+123\par
+semyon@semyon-VirtualBox:~$ rm f2.txt \par
+semyon@semyon-VirtualBox:~$ rm f3.txt \par
+semyon@semyon-VirtualBox:~$ mkdir lab course\par
+semyon@semyon-VirtualBox:~$ ls -F\par
+?        Desktop/    Downloads/        f1.txt  head~  Music/     Public/     Videos/\par
+course/  Documents/  examples.desktop  head    lab/   Pictures/  Templates/\par
+semyon@semyon-VirtualBox:~$ cp f1.txt course/\par
+semyon@semyon-VirtualBox:~$ cp f1.txt lab/\par
+semyon@semyon-VirtualBox:~$ ls course/\par
+f1.txt\par
+semyon@semyon-VirtualBox:~$ ls lab/\par
+f1.txt\par
+semyon@semyon-VirtualBox:~$ rm f1.txt \par
+semyon@semyon-VirtualBox:~$ cd course/\par
+semyon@semyon-VirtualBox:~/course$ ls\par
+f1.txt\par
+semyon@semyon-VirtualBox:~/course$ rm f1.txt \par
+semyon@semyon-VirtualBox:~/course$ cd\par
+semyon@semyon-VirtualBox:~$ rm -r course/\par
+semyon@semyon-VirtualBox:~$ rm -rf lab/\par
+semyon@semyon-VirtualBox:~$ ls\par
+?        Documents  examples.desktop  head~  Pictures  Templates\par
+Desktop  Downloads  head              Music  Public    Videos\par
+semyon@semyon-VirtualBox:~$ cat > a1.txt\par
+test  \par
+1234\par
+semyon@semyon-VirtualBox:~$ mkdir test\par
+semyon@semyon-VirtualBox:~$ mv a1.txt test/\par
+semyon@semyon-VirtualBox:~$ ls test/\par
+a1.txt\par
+semyon@semyon-VirtualBox:~$ cp test/a1.txt ~\par
+semyon@semyon-VirtualBox:~$ touch fl\par
+semyon@semyon-VirtualBox:~$ cat fl\par
+semyon@semyon-VirtualBox:~$ cat > fl\par
+Hello\par
+semyon@semyon-VirtualBox:~$ cat >> fl\par
+World\par
+semyon@semyon-VirtualBox:~$ mv fl fl.txt\par
+semyon@semyon-VirtualBox:~$ ls\par
+?       Desktop    Downloads         fl.txt  head~  Pictures  Templates  Videos\par
+a1.txt  Documents  examples.desktop  head    Music  Public    test\par
+semyon@semyon-VirtualBox:~$ cat fl.txt \par
+Hello\par
+World\par
+semyon@semyon-VirtualBox:~$ cal\par
+    \u1054?\u1082?\u1090?\u1103?\u1073?\u1088?\u1100? 2015      \par
+\u1042?\u1089? \u1055?\u1085? \u1042?\u1090? \u1057?\u1088? \u1063?\u1090? \u1055?\u1090? \u1057?\u1073?  \par
+             1  2  3  \par
+ 4  5  6  7  8  9 10  \par
+11 12 13 14 15 16 17  \par
+18 19 20 21 22 23 24  \par
+25 26 27 28 29 30 31  \par
+                      \par
+semyon@semyon-VirtualBox:~$ cal 11 2015\par
+    \u1053?\u1086?\u1103?\u1073?\u1088?\u1100? 2015       \par
+\u1042?\u1089? \u1055?\u1085? \u1042?\u1090? \u1057?\u1088? \u1063?\u1090? \u1055?\u1090? \u1057?\u1073?  \par
+ 1  2  3  4  5  6  7  \par
+ 8  9 10 11 12 13 14  \par
+15 16 17 18 19 20 21  \par
+22 23 24 25 26 27 28  \par
+29 30                 \par
+                      \par
+semyon@semyon-VirtualBox:~$ history | head\par
+    1  sudo\par
+    2  ls\par
+    3  cat\par
+    4  ls\par
+    5  man ls\par
+    6  rwho\par
+    7  rwwho\par
+    8  rwho\par
+    9  sudo rwho\par
+   10  finger 'whoami'\par
+semyon@semyon-VirtualBox:~$ cal > fl.txt \par
+semyon@semyon-VirtualBox:~$ cat fl.txt \par
+    \u1054?\u1082?\u1090?\u1103?\u1073?\u1088?\u1100? 2015      \par
+\u1042?\u1089? \u1055?\u1085? \u1042?\u1090? \u1057?\u1088? \u1063?\u1090? \u1055?\u1090? \u1057?\u1073?  \par
+             1  2  3  \par
+ 4  5  6  7  8  9 10  \par
+11 12 13 14 15 16 17  \par
+18 19 20 21 22 23 24  \par
+25 26 27 28 29 30 31  \par
+                      \par
+semyon@semyon-VirtualBox:~$ rm fl.txt \par
+\par
+}

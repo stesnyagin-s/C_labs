@@ -1,0 +1,60 @@
+semyon@semyon-VirtualBox:~$ cat head
+**********************************
+*                                *
+*   Лабораторная работа №12      *
+*   Техника работы с целыми      *
+*           числами              *
+*                                *
+*       Работу выполнил:         *
+*       Стеснягин Семён          *
+*        Группа 80-102Б          *
+*                                *
+**********************************
+semyon@semyon-VirtualBox:~$ cat lab12_var14.c
+#include <stdio.h>
+
+int main(void) {
+    int number, state = 0, lastDigit = 10, currentDigit;
+    while (scanf("%d", &number) != EOF) {
+        while (number != 0) {
+            currentDigit = number % 10;
+            number = number / 10;
+            if (currentDigit == lastDigit) {
+                printf("%s\n", "There are identical adjacent digits in the number.");
+                state = 1;
+                break;
+            }
+            lastDigit = currentDigit;
+        }
+        if (state == 0) {
+            printf("%s\n", "There are NO identical adjacent digits in the number.");
+        }
+        state = 0;
+        lastDigit = 10;
+    }
+    return 0;
+}
+
+semyon@semyon-VirtualBox:~$ gedit lab12_var14.c
+semyon@semyon-VirtualBox:~$ gcc lab12_var14.c
+semyon@semyon-VirtualBox:~$ ./a.out 
+0
+There are NO identical adjacent digits in the number.
+1
+There are NO identical adjacent digits in the number.
+-1
+There are NO identical adjacent digits in the number.
+11
+There are identical adjacent digits in the number.
+-11
+There are identical adjacent digits in the number.
+1234321
+There are NO identical adjacent digits in the number.
+123455123
+There are identical adjacent digits in the number.
+-1231233
+There are identical adjacent digits in the number.
+-5345431 
+There are NO identical adjacent digits in the number.
+987544
+There are identical adjacent digits in the number.

@@ -1,0 +1,251 @@
+
+% cat head 
+***************************************
+*                                     *
+*    Лабораторная работа No20         *
+*                                     *
+*      Стандартные утилиты Unix       *
+*         для обработки файлов        *
+*                                     *
+*          Работу выполнил:           *
+*          Стеснягин Семён            *
+*          Группа: 80-102Б            *
+*                                     *
+***************************************
+% cat > f1.txt
+123
+Hello
+% cat > f2.txt
+abc
+Hello
+% cmp f1.txt f2.txt
+f1.txt f2.txt differ: char 1, line 1
+% cmp f1.txt f2.txt -b
+f1.txt f2.txt differ: char 1, line 1
+% comm f1.txt f2.txt
+123
+Hello
+	abc
+	Hello
+% w f1.txt f2.txt 
+ 9:41PM  up  3:44, 1 user, load averages: 0.60, 0.41, 0.36
+USER       TTY      FROM                      LOGIN@  IDLE WHAT
+% dd if=f1.txt of=f3.txt
+0+1 records in
+0+1 records out
+10 bytes transferred in 0.000071 secs (140748 bytes/sec)
+% cat f3.txt 
+123
+Hello
+% diff f1.txt f2.txt 
+1c1
+< 123
+---
+> abc
+% diff f1.txt f3.txt -q
+% grep He f1.txt 
+Hello
+% grep 'He$' f1.txt
+% join f1.txt f2.txt
+% cat > f4.txt
+a
+c
+b
+a
+% sorf f4.txt 
+zsh: command not found: sorf
+% sort f4.txt 
+a
+a
+b
+c
+% tail f1.txt 
+123
+Hello
+% tee f5.txt
+123
+  3
+% cat f5.txt 
+123
+% tr 'abc' 'qwe'
+abr
+qwr
+% uniq f4.txt 
+a
+c
+b
+a
+% od f1.txt 
+0000000    031061  005063  062510  066154  005157                        
+0000012
+% sum f1.txt 
+26867 1 f1.txt
+% cut -c 1-2 f1.txt
+12
+He
+% tar -cf archive f1.txt f2.txt
+% gzip f4.txt 
+% gzip -d f4.txt.gz
+% awk 'length($0) > 3' f1.txt  
+Hello
+% sed = f4.txt | sed 'N;s/\n/\. /'
+1. a
+2. c
+3. b
+4. a
+% bzip2 f3.txt
+% bzip2 -d f3.txt.bz2
+% head -n 2 f4.txt
+a
+c
+% iconv -f ASCII -t utf-8 f3.txt
+123
+Hello
+% diff -u f3.txt f4.txt > difference.diff
+% patch < difference.diff
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- f3.txt	2016-02-24 21:43:45.000000000 +0000
+|+++ f4.txt	2016-02-24 21:45:10.860252000 +0000
+--------------------------
+Patching file f3.txt using Plan A...
+Hunk #1 succeeded at 1.
+done
+% md5 f3.txt
+MD5 (f3.txt) = 692a4b6d2d13d25cf7c4d8f1fd58c7a9
+% du
+56	./.config/xfce4/xfconf/xfce-perchannel-xml
+60	./.config/xfce4/xfconf
+4	./.config/xfce4/xfwm4
+20	./.config/xfce4/desktop
+8	./.config/xfce4/panel/launcher-9
+8	./.config/xfce4/panel/launcher-10
+8	./.config/xfce4/panel/launcher-11
+8	./.config/xfce4/panel/launcher-12
+36	./.config/xfce4/panel
+8	./.config/xfce4/terminal
+132	./.config/xfce4
+16	./.config/Thunar
+8	./.config/dconf
+12	./.config/Mousepad
+8	./.config/mc
+180	./.config
+8	./.cache/sessions/thumbs-:0
+12	./.cache/sessions
+44	./.cache/gstreamer-1.0
+4	./.cache/dconf
+8	./.cache/mc
+72	./.cache
+8	./.local/share/mc
+16	./.local/share
+20	./.local
+4	./.gvfs
+4	./Desktop
+468	.
+% file f3.txt
+f3.txt: ASCII text
+% touch empty
+% touch -t 200701310846.26 empty
+% find . -name 'f*'
+./f1.txt
+./f2.txt
+./f3.txt
+./f4.txt
+./f5.txt
+./f3.txt.orig
+% find . -mtime +600 -print
+./empty
+% echo A B C | xargs echo
+A B C
+% df
+Filesystem      1K-blocks    Used    Avail Capacity  Mounted on
+/dev/gpt/rootfs  20307196 3531892 15150732    19%    /
+devfs                   1       1        0   100%    /dev
+% paste f1.txt f2.txt
+123	abc
+Hello	Hello
+% cat lab11_var43.c 
+#include <stdio.h>
+
+int main(void) {    int input, wordCount, charCount, state;wordCount = charCount = state = 0;
+while((input = getchar()) != EOF) { if(input == ' ' || input == '\n' || input == '\t') {            state = 0; }else {
+            if(state == 0) { state = 1;wordCount++;}charCount++;}}
+    printf("%s %.2f\n","The average length of a word is", (float)charCount/(float)wordCount);
+    return 0;
+}
+% indent lab11_var43.c  
+% cat lab11_var43.c
+#include <stdio.h>
+
+int 
+main(void)
+{
+	int		input     , wordCount, charCount, state;
+	wordCount = charCount = state = 0;
+	while ((input = getchar()) != EOF) {
+		if (input == ' ' || input == '\n' || input == '\t') {
+			state = 0;
+		} else {
+			if (state == 0) {
+				state = 1;
+				wordCount++;
+			} charCount++;
+		}
+	}
+	printf("%s %.2f\n", "The average length of a word is", (float)charCount / (float)wordCount);
+	return 0;
+}
+% split -l 2 f4.txt 
+% mktemp
+/tmp/tmp.YdjhhkRO
+% mktemp -d
+/tmp/tmp.lQn380dg
+% file -b lab11_var43.c
+C source, ASCII text
+% md5 -s Hello
+MD5 ("Hello") = 8b1a9953c4611296a827abf8c47804d7
+% df -h
+Filesystem         Size    Used   Avail Capacity  Mounted on
+/dev/gpt/rootfs     19G    3.4G     14G    19%    /
+devfs              1.0K    1.0K      0B   100%    /dev
+% df -T
+Filesystem       Type  1K-blocks    Used    Avail Capacity  Mounted on
+/dev/gpt/rootfs  ufs    20307196 3532032 15150592    19%    /
+devfs            devfs         1       1        0   100%    /dev
+% du -m
+1	./.config/xfce4/xfconf/xfce-perchannel-xml
+1	./.config/xfce4/xfconf
+1	./.config/xfce4/xfwm4
+1	./.config/xfce4/desktop
+1	./.config/xfce4/panel/launcher-9
+1	./.config/xfce4/panel/launcher-10
+1	./.config/xfce4/panel/launcher-11
+1	./.config/xfce4/panel/launcher-12
+1	./.config/xfce4/panel
+1	./.config/xfce4/terminal
+1	./.config/xfce4
+1	./.config/Thunar
+1	./.config/dconf
+1	./.config/Mousepad
+1	./.config/mc
+1	./.config
+1	./.cache/sessions/thumbs-:0
+1	./.cache/sessions
+1	./.cache/gstreamer-1.0
+1	./.cache/dconf
+1	./.cache/mc
+1	./.cache
+1	./.local/share/mc
+1	./.local/share
+1	./.local
+1	./.gvfs
+1	./Desktop
+1	.
+% touch -d '2007-01-31 08:46:26' empty
+% md5 *.txt
+MD5 (f1.txt) = eb5da0865526f3b291fec0bcc3c7b131
+MD5 (f2.txt) = 89d4cb5a7000f898ad2a960c12626ae3
+MD5 (f3.txt) = 692a4b6d2d13d25cf7c4d8f1fd58c7a9
+MD5 (f4.txt) = 692a4b6d2d13d25cf7c4d8f1fd58c7a9
+MD5 (f5.txt) = ba1f2511fc30423bdbb183fe33f3dd0f

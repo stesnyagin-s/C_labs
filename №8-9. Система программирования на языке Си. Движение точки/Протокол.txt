@@ -1,0 +1,119 @@
+semyon@semyon-VirtualBox:~$ cat head 
+***************************************
+*                                     *
+*      Лабораторная работа №8         *
+*                                     *
+*      Системы программирования       *
+*           на языке Си               *
+*                                     *
+*          Работу выполнил:           *
+*          Стеснягин Семён            *
+*          Группа: 80-102Б            *
+*                                     *
+***************************************
+semyon@semyon-VirtualBox:~$ cat lab8.c
+/*         Лабораторная работа 8.
+ * Студент гр. 80-102Б, Стеснягин С. М. *
+
+include <stdio.h>
+
+int main() {
+      printf("Hello, Charles!\n");
+      return 0
+}
+semyon@semyon-VirtualBox:~$ gcc -std=c99 -Wall -pedantic lab8.c
+lab8.c:1:1: error: unterminated comment
+ /*         Лабораторная работа 8.
+ ^
+lab8.c:9:0: warning: ISO C forbids an empty translation unit [-Wpedantic]
+ }
+ ^
+semyon@semyon-VirtualBox:~$ cat lab8.c
+/*         Лабораторная работа 8.
+ * Студент гр. 80-102Б, Стеснягин С. М. */
+
+include <stdio.h>
+
+int main() {
+      printf("Hello, Charles!\n");
+      return 0
+}
+semyon@semyon-VirtualBox:~$ gcc -std=c99 -Wall -pedantic lab8.c
+lab8.c:4:9: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘<’ token
+ include <stdio.h>
+         ^
+semyon@semyon-VirtualBox:~$ gcc -std=c99 -Wall -pedantic lab8.c
+lab8.c: In function ‘main’:
+lab8.c:9:1: error: expected ‘;’ before ‘}’ token
+ }
+ ^
+semyon@semyon-VirtualBox:~$ cat lab8.c
+/*         Лабораторная работа 8.
+ * Студент гр. 80-102Б, Стеснягин С. М. */
+
+#include <stdio.h>
+
+int main() {
+      printf("Hello, Charles!\n");
+      return 0;
+}
+semyon@semyon-VirtualBox:~$ gcc -std=c99 -Wall -pedantic lab8.c
+semyon@semyon-VirtualBox:~$ ./a.out 
+Hello, Charles!
+semyon@semyon-VirtualBox:~$ cat head
+***************************************
+*                                     *
+*      Лабораторная работа №9         *
+*                                     *
+*         Программирование на         *
+*             на языке Си             *
+*                                     *
+*          Работу выполнил:           *
+*          Стеснягин Семён            *
+*          Группа: 80-102Б            *
+*                                     *
+***************************************
+semyon@semyon-VirtualBox:~$ cat lab9.c 
+#include <stdio.h>
+
+int abs(int a);
+
+int sign(int a);
+
+int min(int m, int n);
+
+int main(void) {
+    const int i0 = -11, j0 = -6, l0 = -5, length = 10, x1 = 5, y1 = -15;
+    int iPrev = i0, jPrev = j0, lPrev = l0, k;
+    int i = iPrev, j = jPrev, l = lPrev;
+    for (k = 0; k < 50; k++) {
+        i = (iPrev + jPrev + lPrev) * (k + 1) % 25 - iPrev * jPrev * lPrev * (k + 2) % 10 + 10;
+        j = min((iPrev + jPrev + lPrev) * (k + 3) % 25, iPrev * jPrev * lPrev * (k + 4) % 25) + 10;
+        l = 2 * sign(lPrev) * abs((iPrev + jPrev + lPrev) * (k + 5) % 10 - iPrev * jPrev * lPrev * (k + 6) % 25);
+        iPrev = i;
+        jPrev = j;
+        lPrev = l;
+        if (((i - x1) <= length) && ((i - x1) >= 0) && ((j - y1) <= length) && ((j - y1) >= 0)) {
+            printf("Point enter a square, coordinate: i = %d; j = %d, intercation = %d, parament of movement = %d\n", i,
+                   j,
+                   k+1, l);
+            break;
+        }
+        else {
+            if (k == 49)
+                printf("Point DID NOT enter a hole, coordinate: i = %d; j = %d, intercation = %d, parament of movement = %d\n",
+                       i, j,
+                       k+1, l);
+        }
+    }
+
+}
+
+int abs(int a) { return (a >= 0 ? a : -a); }
+
+int sign(int a) { return (a >= 0 ? 1 : -1); }
+
+int min(int a, int b) { return (a <= b ? a : b); }
+semyon@semyon-VirtualBox:~$ gcc -std=c99 -Wall -pedantic lab9.c
+semyon@semyon-VirtualBox:~$ ./a.out 
+Point enter a square, coordinate: i = 13; j = -14, intercation = 9, parament of movement = -36

@@ -1,0 +1,101 @@
+semyon@semyon-VirtualBox:~$ cat head
+********************************
+*                              *
+*   Лабораторная работа №10    *
+*      Отладчик системы        *
+*  программирования ОС Unix    *
+*      Работу выполнил:        *
+*      Стеснягин Семён         *
+*       Группа 80-102Б         *
+*                              *
+********************************
+semyon@semyon-VirtualBox:~$ cat lab11_var43.c 
+#include <stdio.h>
+
+int main(void) {
+    int input, wordCount, charCount, state;
+    wordCount = charCount = state = 0;
+    while((input = getchar()) != EOF) {
+        if(input == ' ' || input == '\n' || input == '\t') {
+            state = 0;
+        }
+        else {
+            if(state == 0) {
+                state = 1;
+                wordCount++;
+            }
+            charCount++;
+        }
+    }
+    printf("%s %.2f"\n,"The average length of a word is", (float)charCount/(float)wordCount);
+    return 0;
+}
+semyon@semyon-VirtualBox:~$ gcc lab11_var43.c -g
+semyon@semyon-VirtualBox:~$ gdb a.out 
+GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) break 7
+Breakpoint 1 at 0x40059a: file lab11_var43.c, line 7.
+(gdb) run
+Starting program: /home/semyon/a.out 
+Hello World
+
+Breakpoint 1, main () at lab11_var43.c:7
+7	        if(input == ' ' || input == '\n' || input == '\t') {
+(gdb) next
+11	            if(state == 0) {
+(gdb) next
+12	                state = 1;
+(gdb) 
+13	                wordCount++;
+(gdb) 
+15	            charCount++;
+(gdb) 
+6	    while((input = getchar()) != EOF) {
+(gdb) 
+
+Breakpoint 1, main () at lab11_var43.c:7
+7	        if(input == ' ' || input == '\n' || input == '\t') {
+(gdb) 
+11	            if(state == 0) {
+(gdb) 
+15	            charCount++;
+(gdb) 
+6	    while((input = getchar()) != EOF) {
+(gdb) 
+
+Breakpoint 1, main () at lab11_var43.c:7
+7	        if(input == ' ' || input == '\n' || input == '\t') {
+(gdb) 
+11	            if(state == 0) {
+(gdb) 
+15	            charCount++;
+(gdb) 
+6	    while((input = getchar()) != EOF) {
+(gdb) 
+
+Breakpoint 1, main () at lab11_var43.c:7
+7	        if(input == ' ' || input == '\n' || input == '\t') {
+(gdb) print charCount 
+$1 = 3
+(gdb) print wordCount 
+$2 = 1
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 2524] will be killed.
+
+Quit anyway? (y or n) y

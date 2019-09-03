@@ -1,0 +1,192 @@
+semyon@semyon-VirtualBox:~$ cat head
+**********************************
+*                                *
+*   Лабораторная работа №21      *
+*      Программирование на       *
+*   интерпретируемых командных   *
+*            языках              *
+*                                *
+*       Работу выполнил:         *
+*       Стеснягин Семён          *
+*        Группа 80-102Б          *
+*                                *
+**********************************
+semyon@semyon-VirtualBox:~$ cat lab21_var14.sh
+#! /usr/bin/env bash
+
+if [ $1 == "-C" ]
+ then
+source lab21.conf
+else 
+prefix=$1
+rangeMin=$2
+rangeMax=$3
+directory=$4
+fi
+
+echo "Префикс: $prefix"
+echo "Диапозон: $rangeMin-$rangeMax" бит
+echo "Директория: $directory"
+
+print_help()
+{
+echo "Синтаксис: lab21_var14.sh [-C] / [Префикс] [Минимальный размер файла] [Максимальный размер файла] [Директория]"
+echo "Пример: lab21_var14.sh old 1024 2048 /home/user/"
+echo "Пример: lab21_var14.sh -C"
+}
+
+if  [[ "$prefix" = '' ]] || [[ "$rangeMin" -eq '' ]] || [[ "$rangeMax" -eq '' ]] || [[ "$directory" = '' ]] 
+ then
+ echo "Ошибка. Пропущены некоторые параметры."
+ print_help
+ exit 1
+fi
+
+
+if ! [[ $rangeMin =~ ^-?[0-9]+$ ]] || ! [[ $rangeMax =~ ^-?[0-9]+$ ]] || [[ $rangeMin -lt 0 ]] || [[ $rangeMax -lt 0 ]] ;  then
+   echo "Ошибка. Размеры файлов должны быть целыми числами >= 0" >&2; 
+   print_help
+   exit 1
+fi
+
+if   [[ "$rangeMin" -gt "$rangeMax" ]]
+ then
+ echo "Минимальный размер файла должен быть равен или быть меньше максимального."
+ print_help
+ exit 1
+fi
+
+
+files=$(ls -l $directory | grep -v '^d' | awk -v min=$rangeMin -v max=$rangeMax '{ if ( $5 >= 'min' && $5 <= 'max' ) print $9 }' | grep "^$prefix")
+if [ "$files" == "" ] 
+then echo "Файлы, соответствующие заданным параметрам, не найдены"
+else 
+echo "$files" | while read name; do rm "$directory$name"; echo "$directory$name - удалён";    done
+fi
+semyon@semyon-VirtualBox:~$ chmod u+x lab21_var14.sh
+semyon@semyon-VirtualBox:~$ cat lab21_files.sh
+#! /usr/bin/env bash
+
+mkdir lab21_test
+
+for i in `seq 1 5`;
+        do
+             echo "Some text" | cat > ./lab21_test/one_$i
+             echo "Some bigger text" | cat > ./lab21_test/two_$i
+        done    
+for i in `seq 6 10`;
+        do
+             echo "Some text" | cat > ./lab21_test/two_$i
+             echo "Some bigger text" | cat > ./lab21_test/one_$i
+        done    
+                
+
+semyon@semyon-VirtualBox:~$ chmod u+x lab21_files.sh
+semyon@semyon-VirtualBox:~$ ls
+=          examples.desktop  lab12_var14.c   lab21.conf~      protocol.txt
+?          f1.txt            lab12_var14.c~  lab21_files.sh   Public
+1024       f4.txt            lab13_var14.c   lab21_files.sh~  Templates
+a1.txt     file              lab14_var14.c   lab21.sh         Videos
+a.out      head              lab14_var14.c~  lab21_var14.sh
+Desktop    head~             lab15_var14.c   lab21_var14.sh~
+Documents  kp4_var14.c       lab15_var14.c~  Music
+Downloads  lab11_var43.c     lab21.conf      Pictures
+semyon@semyon-VirtualBox:~$ ./lab21_files.sh
+semyon@semyon-VirtualBox:~$ ls -l lab21_test/
+total 80
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 one_1
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_10
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 one_2
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 one_3
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 one_4
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 one_5
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_6
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_7
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_8
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_9
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_1
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_10
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_2
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_3
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_4
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_5
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_6
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_7
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_8
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_9
+semyon@semyon-VirtualBox:~$ ./lab21_var14.sh one 9 11 lab21_test/
+Префикс: one
+Диапозон: 9-11 бит
+Директория: lab21_test/
+lab21_test/one_1 - удалён
+lab21_test/one_2 - удалён
+lab21_test/one_3 - удалён
+lab21_test/one_4 - удалён
+lab21_test/one_5 - удалён
+semyon@semyon-VirtualBox:~$ ls -l lab21_test/
+total 60
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_10
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_6
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_7
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_8
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 one_9
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_1
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_10
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_2
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_3
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_4
+-rw-rw-r-- 1 semyon semyon 17 мая    3 17:08 two_5
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_6
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_7
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_8
+-rw-rw-r-- 1 semyon semyon 10 мая    3 17:08 two_9
+semyon@semyon-VirtualBox:~$ ./lab21_var14.sh one 17 17 lab21_test/
+Префикс: one
+Диапозон: 17-17 бит
+Директория: lab21_test/
+lab21_test/one_10 - удалён
+lab21_test/one_6 - удалён
+lab21_test/one_7 - удалён
+lab21_test/one_8 - удалён
+lab21_test/one_9 - удалён
+semyon@semyon-VirtualBox:~$ ./lab21_var14.sh one 17 17 lab21_test/
+Префикс: one
+Диапозон: 17-17 бит
+Директория: lab21_test/
+Файлы, соответствующие заданным параметрам, не найдены
+semyon@semyon-VirtualBox:~$ ./lab21_var14.sh two 2000 1 lab21_test/
+Префикс: two
+Диапозон: 2000-1 бит
+Директория: lab21_test/
+Минимальный размер файла должен быть равен или быть меньше максимального.
+Синтаксис: lab21_var14.sh [-C] / [Префикс] [Минимальный размер файла] [Максимальный размер файла] [Директория]
+Пример: lab21_var14.sh old 1024 2048 /home/user/
+Пример: lab21_var14.sh -C
+semyon@semyon-VirtualBox:~$ ./lab21_var14.sh two 2000 1 
+Префикс: two
+Диапозон: 2000-1 бит
+Директория: 
+Ошибка. Пропущены некоторые параметры.
+Синтаксис: lab21_var14.sh [-C] / [Префикс] [Минимальный размер файла] [Максимальный размер файла] [Директория]
+Пример: lab21_var14.sh old 1024 2048 /home/user/
+Пример: lab21_var14.sh -C
+semyon@semyon-VirtualBox:~$ cat lab21.conf
+prefix="two"
+rangeMin=1
+rangeMax=100
+directory="lab21_test/"
+semyon@semyon-VirtualBox:~$ ./lab21_var14.sh -C
+Префикс: two
+Диапозон: 1-100 бит
+Директория: lab21_test/
+lab21_test/two_1 - удалён
+lab21_test/two_10 - удалён
+lab21_test/two_2 - удалён
+lab21_test/two_3 - удалён
+lab21_test/two_4 - удалён
+lab21_test/two_5 - удалён
+lab21_test/two_6 - удалён
+lab21_test/two_7 - удалён
+lab21_test/two_8 - удалён
+lab21_test/two_9 - удалён
+

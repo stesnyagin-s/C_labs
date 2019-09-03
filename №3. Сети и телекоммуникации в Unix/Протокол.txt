@@ -1,0 +1,93 @@
+158109@hobbit:~$ ping -c 4 192.168.2.50
+PING 192.168.2.50 (192.168.2.50): 56 data bytes
+64 bytes from 192.168.2.50: icmp_seq=0 ttl=64 time=0.150 ms
+64 bytes from 192.168.2.50: icmp_seq=1 ttl=64 time=0.137 ms
+64 bytes from 192.168.2.50: icmp_seq=2 ttl=64 time=0.135 ms
+64 bytes from 192.168.2.50: icmp_seq=3 ttl=64 time=0.130 ms
+
+--- 192.168.2.50 ping statistics ---
+4 packets transmitted, 4 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.130/0.138/0.150/0.007 ms
+158109@hobbit:~$ touch file1
+158109@hobbit:~$ mkdir dir1
+158109@hobbit:~$ rlogin imp
+Password:
+Last login: Mon Oct 12 15:49:12 from hobbit
+Copyright (c) 1992-2011 The FreeBSD Project.
+Copyright (c) 1979, 1980, 1983, 1986, 1988, 1989, 1991, 1992, 1993, 1994
+	The Regents of the University of California. All rights reserved.
+
+FreeBSD 8.2-STABLE (GENERIC) #1: Tue Jul 26 18:14:34 MSD 2011
+
+Welcome to FreeBSD!
+You have mail.
+158109@imp:~$ scp file1 imp:/stud/158109
+Password:
+file1                                         100%    0     0.0KB/s   00:00    
+158109@imp:~$ scp imp:/stud/158109/file1 dir1/file3
+Password:
+file1                                         100%    0     0.0KB/s   00:00    
+158109@imp:~$ scp -r dir1 imp:
+Password:
+file3                                         100%    0     0.0KB/s   00:00    
+158109@imp:~$ scp -r imp:dir2 .
+Password:
+158109@hobbit:~$ pax -w dir1 | ssh imp 'pax -r'
+Password:
+158109@imp:~$ logout
+rlogin: connection closed
+158109@hobbit:~$ telnet imp
+Trying 192.168.2.38...
+Connected to imp.
+Escape character is '^]'.
+[ Trying mutual KERBEROS5 (host/imp@UMC8.RU)... ]
+Kerberos V5: mk_req failed (No such file or directory)
+[ Trying KERBEROS5 (host/imp@UMC8.RU)... ]
+Kerberos V5: mk_req failed (No such file or directory)
+Trying SRA secure login:
+User (158109): 158109
+Password: 
+[ SRA accepts you ]
+
+FreeBSD/i386 (imp.zzz.umc8.ru) (pts/1)
+
+Last login: Mon Oct 12 16:33:37 from hobbit
+Copyright (c) 1992-2011 The FreeBSD Project.
+Copyright (c) 1979, 1980, 1983, 1986, 1988, 1989, 1991, 1992, 1993, 1994
+	The Regents of the University of California. All rights reserved.
+
+FreeBSD 8.2-STABLE (GENERIC) #1: Tue Jul 26 18:14:34 MSD 2011
+
+Welcome to FreeBSD!
+You have mail.
+158109@imp:~$ logout
+Connection closed by foreign host.
+158109@hobbit:~$ tar -cf arc.tar dir1 
+158109@hobbit:~$ ls
+3Lab			arc.tar			file1
+Desktop			dir1			file2
+Mail			dir2			head
+Unsaved Document 1	f1.txt~			head~
+158109@hobbit:~$ tar -xf arc.tar 
+158109@hobbit:~$ tar -tvf arc.tar 
+drwx------  2 158109 stud        0 Oct 12 16:37 dir1/
+-rw-------  1 158109 stud        0 Oct 12 16:38 dir1/file3
+semyon@semyon-VirtualBox:~$ dict elephant | iconv -f utf-8 -t koi8-r | head 
+6 definitions found
+
+From The Collaborative International Dictionary of English v.0.48 [gcide]:
+
+  pachyderm \pach"y*derm\ (p[a^]k"[i^]*d[~e]rm), n. [Cf. F.
+     pachyderme.] (Zool.)
+     Any of various nonruminant hoofed mammals having very thick
+     skin, including the {elephant}, {rhinoceros}, and
+     {hippopotamus}, one of the Pachydermata.
+     [WordNet 1.5 + 1913 Webster]
+158109@hobbit:~$ cat > file.txt
+asdasd
+158109@hobbit:~$ iconv -c -f utf-8 -t cp1251 file.txt
+asdasd
+158109@hobbit:~$ unix2dos file.txt
+unix2dos: converting file file.txt to DOS format ...
+158109@hobbit:~$ gzip -9 -c arc.tar > arc1.tgz
+158109@hobbit:~$ gzip -d -c arc1.tgz > arc2.tar

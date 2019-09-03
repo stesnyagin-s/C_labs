@@ -1,0 +1,120 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+278 Лекция 19.
+ Формула и ряд Тейлора
+\end_layout
+
+\begin_layout Standard
+Лекция 19.
+ Формула и ряд Тейлора
+\end_layout
+
+\begin_layout Standard
+Многочлен Тейлора.Формула Тейлора.
+ Ряд тейлора.
+ Формулы и ряды Тейлора для некоторых элементарных функций и использование
+ их для вычисления пределов и в приближённых вычислениях.
+\end_layout
+
+\begin_layout Standard
+Формула и ряд Тейлора относятся к числу важнейших понятий математического
+ анализа.
+ Они широко используются в математике.
+ В частности, в этом семестре мы будем использовать их при исследовании
+ функций, приближённом значений функций, численном решении уравнений и оценке
+ возникающих при этом ошибок.
+\end_layout
+
+\begin_layout Standard
+19.1.
+ Многочлен Тейлора
+\end_layout
+
+\begin_layout Standard
+Пусть функция y = f(x) n раз дифференцируема в некотором интервале, содержащем
+ точку x0.
+ Построим многочлен степени m < n
+\end_layout
+
+\begin_layout Standard
+коэфиценты которого определим из условия совпаления значений этого многочлена
+ и его m производных с соответствующими значениями функций y = f(x) и её
+ производных в точку x0.
+\end_layout
+
+\begin_layout Standard
+9Б.Тейлор(1685-1731) - английский математик.
+\end_layout
+
+\end_body
+\end_document
